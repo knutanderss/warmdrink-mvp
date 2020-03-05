@@ -1,11 +1,20 @@
 let i = 2;
 function createListElement() {
-  const li = document.createElement("li");
-  li.classList.add("card", "mt-2", "bg-success");
-  li.innerHTML = `<div class="card-body">
-      <h3 class="card-title">ListItem ${i++}</h3>
+  const left = document.createElement("li");
+  left.classList.add("card", "mt-2", "bg-success");
+  left.id = `g${i}`;
+  left.innerHTML = `<div class="card-body">
+      <h3 class="card-title">ListItem ${i}</h3>
     </div>`;
-  return li;
+
+  const right = document.createElement("li");
+  right.classList.add("card", "mt-2", "bg-warning");
+  right.id = `y${i}`;
+  right.innerHTML = `<div class="card-body">
+      <h3 class="card-title">ListItem ${i}</h3>
+    </div>`;
+  i++;
+  return [left, right];
 }
 
 function insertAfter(before, after) {

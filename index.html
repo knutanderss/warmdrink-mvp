@@ -24,22 +24,36 @@
         <ul class="col-md">
           <li id="a" class="card mt-2 bg-success">
             <div class="card-body">
-              <h3 class="card-title">ListItem 0</h3>
+              <h3 class="card-title">id=a</h3>
             </div>
           </li>
           <li id="b" class="card mt-2 bg-success">
             <div class="card-body">
-              <h3 class="card-title">ListItem 1</h3>
+              <h3 class="card-title">id=b</h3>
             </div>
           </li>
         </ul>
+        <div class="col-md">
+          <li id="x" class="card mt-2 bg-warning">
+            <div class="card-body">
+              <h3 class="card-title">id=x</h3>
+            </div>
+          </li>
+          <li id="y" class="card mt-2 bg-warning">
+            <div class="card-body">
+              <h3 class="card-title">id=y</h3>
+            </div>
+          </li>
+        </div>
+      </div>
+      <div class="row mt-4">
         <div class="card col-md text-left">
           <div class="card-body">
             <pre><code>
-const l0 = document.getElementById("a");
-const l1 = document.getElementById("b");
-addBetween(l0, l1, createListElement());
-addBetween(l0, l1, createListElement());
+const a = document.getElementById("a");
+const b = document.getElementById("b");
+const x = document.getElementById("x");
+const y = document.getElementById("y");
             </code></pre>
           </div>
         </div>
