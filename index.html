@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>WarmDrink, minimal example</title>
+  </head>
+  <body>
+    <div class="container text-center">
+      <div class="row mt-4">
+        <ul class="col-md">
+          <li id="a" class="card mt-2 bg-success">
+            <div class="card-body">
+              <h3 class="card-title">ListItem 0</h3>
+            </div>
+          </li>
+          <li id="b" class="card mt-2 bg-success">
+            <div class="card-body">
+              <h3 class="card-title">ListItem 1</h3>
+            </div>
+          </li>
+        </ul>
+        <div class="card col-md text-left">
+          <div class="card-body">
+            <pre><code>
+const l0 = document.getElementById("a");
+const l1 = document.getElementById("b");
+addBetween(l0, l1, createListElement());
+addBetween(l0, l1, createListElement());
+            </code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
