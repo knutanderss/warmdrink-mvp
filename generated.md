@@ -8,8 +8,11 @@ placeholders
 ```
 generates
 ```javascript
-function $WD_check_Li(Li) {
-  return Li instanceof HTMLLIElement;
+function $WD_expect_Li(Li) {
+  if (!(Li instanceof HTMLLIElement)) {
+    console.log("Typechecking failed. Checking type Li for ", Li);
+    throw Error(`Typechecking failed for Li`);
+  }
 }
 ```
 
@@ -17,30 +20,55 @@ function $WD_check_Li(Li) {
 ```
 relations
   (precedes) a, b ::= (`isAfter(a, b)`, `insertAfter(a, b)`)
+  (new) c ::=
+    test ''' '''
+    establish
+      '''
+      «c» = createListElement()
+      '''
 ```
 generates
 ```javascript
-function $WD_check_precedes(a, b) {
-  // typecheck a and b?
-  const typeCheck = $WD_check_Li(a) && $WD_check_Li(b);
-  if (!typeCheck) {
-    console.log("Typechecking failed. Checking type Li for ", a, b);
-    return;
-  }
+function $WD_test_precedes(a, b) {
+  // typecheck a and b
+  $WD_expect_Li(a);
+  $WD_expect_Li(b);
 
   // check relation
   return isAfter(a, b);
 }
 
-function $WD_perform_precedes(a, b) {
-  // typecheck a and b?
-  const typeCheck = $WD_check_Li(a) && $WD_check_Li(b);
-  if (!typeCheck) {
-    console.log("Typechecking failed. Checking type Li for ", a, b);
-    return;
-  }
+function $WD_establish_precedes(a, b) {
+  // typecheck a and b
+  $WD_expect_Li(a);
+  $WD_expect_Li(b);
 
+  // establish relation
   insertAfter(a, b);
+
+  // test relation predicate
+  if(!$WD_test_precedes(a, b)) {
+    throw Error(`Relation predicate not satisfied after relation was established`);
+  }
+}
+
+function $WD_test_new(c) {
+  // typecheck c
+  $WD_expect_Li(c);
+
+  // nothing to test
+}
+
+function $WD_establish_new(c) {
+  // typecheck c
+  $WD_expect_Li(c);
+
+  // nothing to establish
+
+  // test relation predicate
+  if(!$WD_test_new(c)) {
+    throw Error(`Relation predicate not satisfied after relation was established`);
+  }
 }
 ```
 
@@ -54,26 +82,24 @@ generates
 
 ```javascript
 function addBetween(a, b, c) {
-  // typecheck a, b, and c?
-  const typeCheck = $WD_check_Li(a) && $WD_check_Li(b) && $WD_check_Li(c);
-  if (!typeCheck) {
-    console.log("Typechecking failed. Checking type Li for ", a, b, c);
-    return;
-  }
+  // typecheck a, b, and c
+  $WD_expect_Li(a);
+  $WD_expect_Li(b);
+  $WD_expect_Li(c);
 
   // check precondition relations
-  preCondition = $WD_check_precedes(a, b); // && could me more here
+  preCondition = $WD_test_precedes(a, b); // && could be more here
   if (!preCondition) {
     console.log("Precondition not holding for rule addBetween on ", a, b, c);
     return;
   }
 
   // perform new relations from left to right
-  $WD_perform_precedes(a, c);
-  $WD_perform_precedes(c, b);
+  $WD_establish_precedes(a, c);
+  $WD_establish_precedes(c, b);
 
   // check that all relations hold
-  postCondition = $WD_check_precedes(a, b); // && could me more here
+  postCondition = $WD_test_precedes(a, b); // && could me more here
   if (!preCondition) {
     console.log("Postcondition not holding for rule addBetween on ", a, b, c);
     return;
